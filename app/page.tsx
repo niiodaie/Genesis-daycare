@@ -1,5 +1,6 @@
 import HeroVideo from "@/components/HeroVideo";
 import FamilyFeedback from "@/components/FamilyFeedback";
+import KidsGallery from "@/components/KidsGallery";
 import Link from "next/link";
 
 export default function HomePage() {
@@ -26,6 +27,7 @@ export default function HomePage() {
 
       {/* 3-card highlights */}
       <section className="py-10">
+        <KidsGallery />  {/* 👈 new kid-friendly image strip */}
         <div className="container-p grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {[
             {
