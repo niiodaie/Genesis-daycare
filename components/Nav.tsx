@@ -23,12 +23,12 @@ export default function Nav() {
       <div className="container-p flex items-center justify-between py-4">
         {/* Logo — crisp, no stretching */}
         <Link href="/" aria-label="Genesis Royalty Daycare Home" className="flex items-center gap-2">
-          <span className="relative h-10 w-10 shrink-0">
+          <span className="relative h-12 w-12 shrink-0">
             <Image
-              src="/logo.png"             // use the trimmed PNG in /public
+              src="/logo-mark.png"     // <-- use the square mark
               alt="Genesis Royalty Daycare"
               fill
-              sizes="40px"
+              sizes="48px"
               priority
               className="object-contain"
             />
