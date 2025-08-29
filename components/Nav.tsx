@@ -24,50 +24,41 @@ export default function Nav() {
 
   return (
     <header className="sticky top-0 z-40 bg-white/90 backdrop-blur supports-[backdrop-filter]:bg-white/70 border-b shadow-sm">
-      <div className="container-p flex items-center justify-between py-4 md:py-5">
-        {/* BRAND — large icon + wordmark (Option A) */}
-        {/* BRAND — full original logo inside a big rounded box */}
-<Link
-  href="/"
-  aria-label="Genesis Royalty Daycare — Home"
-  className="flex items-center gap-4 md:gap-5 min-w-0"
->
-  <span className="grid place-items-center rounded-2xl bg-white p-2 md:p-3 shadow-soft ring-2 ring-royalYellow/60 shrink-0">
-    <Image
-      src="/logo-transparent.png"            // full logo; use this for a clean edge
-      // you can switch to "/logo.png" if you prefer the white background one
-      alt="Genesis Royalty Daycare Center LLC"
-      width={240}
-      height={80}
-      priority
-      className="h-12 sm:h-14 md:h-16 lg:h-18 xl:h-20 w-auto object-contain saturate-125 contrast-110 brightness-110"
-    />
-  </span>
-</Link>
-
-          {/* Wordmark — big like the original site (hidden on xs) */}
-          <span className="hidden sm:block leading-tight select-none truncate">
-            <span className="block text-2xl md:text-3xl font-extrabold tracking-tight text-royalRed">
-              GENESIS
-            </span>
-            <span className="block -mt-1 text-xl md:text-2xl font-extrabold tracking-tight text-royalYellow">
-              ROYALTY
-            </span>
+      <div className="container-p flex items-center justify-between py-5">
+        {/* BRAND — full original logo, big inside a soft box */}
+        <Link
+          href="/"
+          aria-label="Genesis Royalty Daycare — Home"
+          className="flex items-center min-w-0"
+        >
+          <span className="grid place-items-center rounded-2xl bg-white p-2 md:p-3 shadow-soft ring-2 ring-royalYellow/60 shrink-0">
+            <Image
+              src="/logo-transparent.png" // or "/logo.png" if you prefer the white-backed version
+              alt="Genesis Royalty Daycare Center LLC"
+              width={280}
+              height={96}
+              priority
+              className="h-12 sm:h-14 md:h-16 lg:h-20 xl:h-24 w-auto object-contain saturate-125 contrast-110 brightness-110"
+            />
           </span>
         </Link>
 
-        {/* Desktop nav (start at lg so brand has more room on tablets) */}
+        {/* Desktop nav (start at lg so the brand has space) */}
         <nav className="hidden lg:flex items-center gap-5 xl:gap-6">
           {links.map((l) => (
             <Link
               key={l.href}
               href={l.href}
-              className={`text-sm font-semibold transition hover:text-royalRed ${isActive(l.href) ? "text-royalRed" : ""}`}
+              className={`text-sm font-semibold transition hover:text-royalRed ${
+                isActive(l.href) ? "text-royalRed" : ""
+              }`}
             >
               {l.label}
             </Link>
           ))}
-          <Link href="/book-tour" className="btn btn-primary text-sm">Enroll</Link>
+          <Link href="/book-tour" className="btn btn-primary text-sm">
+            Enroll
+          </Link>
         </nav>
 
         {/* Mobile menu button */}
@@ -92,13 +83,19 @@ export default function Nav() {
               <Link
                 key={l.href}
                 href={l.href}
-                className={`py-2 border-b ${isActive(l.href) ? "text-royalRed font-semibold" : ""}`}
+                className={`py-2 border-b ${
+                  isActive(l.href) ? "text-royalRed font-semibold" : ""
+                }`}
                 onClick={() => setOpen(false)}
               >
                 {l.label}
               </Link>
             ))}
-            <Link href="/book-tour" className="btn btn-primary text-center" onClick={() => setOpen(false)}>
+            <Link
+              href="/book-tour"
+              className="btn btn-primary text-center"
+              onClick={() => setOpen(false)}
+            >
               Enroll
             </Link>
           </div>
