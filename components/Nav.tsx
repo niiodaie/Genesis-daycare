@@ -24,23 +24,22 @@ export default function Nav() {
 
   return (
     <header className="sticky top-0 z-40 bg-white/90 backdrop-blur supports-[backdrop-filter]:bg-white/70 border-b shadow-sm">
-      {/* ↑ subtle shadow so brand sits above hero */}
       <div className="container-p flex items-center justify-between py-4 md:py-5">
-        {/* BRAND — bigger icon + bigger wordmark */}
-        <Link href="/" aria-label="Genesis Royalty Daycare — Home" className="flex items-center gap-4 md:gap-5">
-          {/* Icon—bigger, crisp, not boxed in */}
+        {/* BRAND — large icon + wordmark (Option A) */}
+        <Link href="/" aria-label="Genesis Royalty Daycare — Home" className="flex items-center gap-4 md:gap-5 min-w-0">
+          {/* Icon — larger, crisp, subtle ring (no heavy box) */}
           <span className="grid place-items-center rounded-2xl bg-white p-1.5 shadow-soft shrink-0 ring-1 ring-royalYellow/30">
             <Image
-              src="/logo-mark.png"                 // square icon in /public
+              src="/logo-mark.png"                              // square icon in /public
               alt="Genesis Royalty logo"
-              width={72} height={72}               // retina-crisp
+              width={80} height={80}                            // render size; crisp on retina
               priority
-              className="h-12 w-12 sm:h-14 sm:w-14 md:h-16 md:w-16 object-contain saturate-125 contrast-110 brightness-110"
+              className="h-12 w-12 sm:h-14 sm:w-14 md:h-16 md:w-16 xl:h-20 xl:w-20 object-contain saturate-125 contrast-110 brightness-110"
             />
           </span>
 
-          {/* Wordmark—larger to match original site feel (hidden on xs) */}
-          <span className="hidden sm:block leading-tight select-none">
+          {/* Wordmark — big like the original site (hidden on xs) */}
+          <span className="hidden sm:block leading-tight select-none truncate">
             <span className="block text-2xl md:text-3xl font-extrabold tracking-tight text-royalRed">
               GENESIS
             </span>
@@ -50,8 +49,8 @@ export default function Nav() {
           </span>
         </Link>
 
-        {/* Desktop nav */}
-        <nav className="hidden md:flex items-center gap-5">
+        {/* Desktop nav (start at lg so brand has more room on tablets) */}
+        <nav className="hidden lg:flex items-center gap-5 xl:gap-6">
           {links.map((l) => (
             <Link
               key={l.href}
@@ -66,7 +65,7 @@ export default function Nav() {
 
         {/* Mobile menu button */}
         <button
-          className="md:hidden"
+          className="lg:hidden"
           onClick={() => setOpen(!open)}
           aria-label="Toggle menu"
           aria-expanded={open}
@@ -80,7 +79,7 @@ export default function Nav() {
 
       {/* Mobile menu */}
       {open && (
-        <div id="mobile-nav" className="md:hidden border-t bg-white">
+        <div id="mobile-nav" className="lg:hidden border-t bg-white">
           <div className="container-p py-4 grid gap-3">
             {links.map((l) => (
               <Link
