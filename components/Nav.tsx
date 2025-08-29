@@ -21,9 +21,18 @@ export default function Nav() {
   return (
     <header className="sticky top-0 z-40 bg-white/80 backdrop-blur supports-[backdrop-filter]:bg-white/60 border-b">
       <div className="container-p flex items-center justify-between py-4">
-        {/* Logo image only (no duplicate text) */}
+        {/* Logo — crisp, no stretching */}
         <Link href="/" aria-label="Genesis Royalty Daycare Home" className="flex items-center gap-2">
-          <Image src="/logo.jpg" alt="Genesis Royalty Daycare" width={44} height={44} className="rounded-lg" />
+          <span className="relative h-10 w-10 shrink-0">
+            <Image
+              src="/logo.png"             // use the trimmed PNG in /public
+              alt="Genesis Royalty Daycare"
+              fill
+              sizes="40px"
+              priority
+              className="object-contain"
+            />
+          </span>
         </Link>
 
         {/* Desktop nav */}
