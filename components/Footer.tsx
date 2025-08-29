@@ -31,6 +31,7 @@ export default function Footer() {
             <li><Link href="/jobs">Jobs</Link></li>
             <li><Link href="/payments">Payments</Link></li>
             <li><Link href="/jobs">Jobs</Link></li>
+            <li><Link href="/portal">Parent Portal</Link></li>
           </ul>
         </div>
         <div>

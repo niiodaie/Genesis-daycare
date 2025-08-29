@@ -9,7 +9,10 @@ const links = [
   { href: "/programs", label: "Programs" },
   { href: "/activities", label: "Daily Activities" },
   { href: "/book-tour", label: "Book a Tour" },
+  { href: "/counseling", label: "Online Counseling" },
   { href: "/payments", label: "Payments" },
+  { href: "/portal", label: "Parent Portal" },
+  { href: "/jobs", label: "Jobs" },
   { href: "/contact", label: "Contact" },
 ];
 
@@ -17,8 +20,9 @@ export default function Nav() {
   const [open, setOpen] = useState(false);
   return (
     <header className="sticky top-0 z-40 bg-white/80 backdrop-blur supports-[backdrop-filter]:bg-white/60 border-b">
-      <div className="container-p flex items-center justify-between py-4">
-        <Logo />
+      <div className="container-p flex items-center justify-between py-4"><Logo />
+        
+          
 
         <nav className="hidden md:flex items-center gap-6">
           {links.map((l) => (
