@@ -35,18 +35,28 @@ export default function Nav() {
       <div className="container-p flex items-center justify-between py-3">
         {/* Logo */}
         {/* Logo + wordmark */}
+{/* Logo + wordmark (punchier & larger) */}
 <Link href="/" aria-label="Genesis Royalty Daycare — Home" className="flex items-center gap-3">
-  {/* mark */}
-  <span className="relative h-10 w-10 sm:h-12 sm:w-12 lg:h-14 lg:w-14 shrink-0">
+  {/* mark in a subtle ring so it stands out on white headers */}
+  <span className="grid place-items-center rounded-xl bg-white ring-2 ring-royalYellow/60 p-1 shadow-soft">
     <Image
-      src="/logo-transparent.png"            // use the transparent background version
+      src="/logo.png"                  // <- try this full logo first
+      // If /logo.png is too wide for the header, use /logo-mark.png instead
       alt="Genesis Royalty logo"
-      fill
+      width={140}                      // visible size; tweak to taste
+      height={40}
       priority
-      sizes="(min-width:1024px) 56px, (min-width:640px) 48px, 40px"
-      className="object-contain drop-shadow-md saturate-125 contrast-110 brightness-110"
+      className="h-10 w-auto sm:h-12 object-contain saturate-125 contrast-110 brightness-110"
     />
   </span>
+
+  {/* wordmark (kept compact so the mark is the star) */}
+  <span className="hidden sm:block leading-tight select-none">
+    <span className="block text-lg sm:text-xl font-extrabold tracking-tight text-royalRed">GENESIS</span>
+    <span className="block -mt-1 text-base sm:text-lg font-extrabold tracking-tight text-royalYellow">ROYALTY</span>
+  </span>
+</Link>
+
 
   {/* wordmark */}
   <span className="hidden sm:block leading-tight select-none">
