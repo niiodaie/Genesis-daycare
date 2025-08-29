@@ -1,29 +1,60 @@
+import Image from "next/image";
+
+const activities = [
+  {
+    title: "Outdoor Play",
+    desc: "Safe playground equipment and structured outdoor activities.",
+    img: "/hero-image-1.jpg",
+  },
+  {
+    title: "Arts & Crafts",
+    desc: "Creative expression through art, music, and crafts.",
+    img: "/hero-image-2.jpg",
+  },
+  {
+    title: "Nutritious Meals",
+    desc: "Healthy meals and snacks following USDA guidelines.",
+    img: "/hero-image-3.jpg",
+  },
+  {
+    title: "Story Time",
+    desc: "Daily reading sessions to develop language skills.",
+    img: "/children-playing.jpg",
+  },
+  {
+    title: "Learning Games",
+    desc: "Educational puzzles and games for cognitive development.",
+    img: "/hero-image-1.jpg",
+  },
+  {
+    title: "Rest Time",
+    desc: "Quiet time and naps for proper rest and development.",
+    img: "/hero-image-3.jpg",
+  },
+];
+
 export default function ActivitiesPage() {
-  const blocks = [
-    { time: "6:30–8:30 AM", title: "Arrival & Free Play" },
-    { time: "8:30–9:00 AM", title: "Morning Circle & Songs" },
-    { time: "9:00–10:00 AM", title: "Learning Centers" },
-    { time: "10:00–10:30 AM", title: "Snack" },
-    { time: "10:30–11:30 AM", title: "Outdoor Play" },
-    { time: "11:30–12:00 PM", title: "Storytime" },
-    { time: "12:00–1:00 PM", title: "Lunch" },
-    { time: "1:00–3:00 PM", title: "Nap/Quiet Time" },
-    { time: "3:00–3:30 PM", title: "Snack" },
-    { time: "3:30–5:30 PM", title: "Enrichment & Free Play" },
-    { time: "5:30–6:00 PM", title: "Pick-Up" },
-  ];
-
   return (
-    <div className="py-10">
-      <h1 className="text-4xl font-extrabold font-display">Daily Activities</h1>
-      <p className="mt-4 text-gray-700">A sample rhythm for our toddlers and preschoolers (infants follow individualized schedules).</p>
+    <div className="py-14">
+      <div className="text-center">
+        <h1 className="text-4xl font-extrabold heading">Daily Activities</h1>
+        <p className="mt-3 max-w-2xl mx-auto text-slate-600">
+          Children learn best through play, so there&apos;s no shortage of fun learning
+          experiences here!
+        </p>
+      </div>
 
-      <div className="mt-8 grid gap-4">
-        {blocks.map((b, i)=> (
-          <div key={i} className="card flex items-center justify-between">
-            <div className="font-semibold">{b.title}</div>
-            <div className="text-gray-600">{b.time}</div>
-          </div>
+      <div className="container-p mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        {activities.map((a) => (
+          <article key={a.title} className="rounded-3xl bg-white shadow-soft overflow-hidden border">
+            <div className="relative aspect-video">
+              <Image src={a.img} alt={a.title} fill className="object-cover" />
+            </div>
+            <div className="p-5">
+              <h2 className="font-semibold">{a.title}</h2>
+              <p className="mt-2 text-slate-700">{a.desc}</p>
+            </div>
+          </article>
         ))}
       </div>
     </div>
