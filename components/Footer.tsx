@@ -3,7 +3,6 @@ import Link from "next/link";
 export default function Footer() {
   const phone = process.env.NEXT_PUBLIC_PHONE || "";
   const info = process.env.NEXT_PUBLIC_EMAIL_INFO || "info@genesisroyaltydaycare.com";
-  const support = process.env.NEXT_PUBLIC_EMAIL_SUPPORT || "support@genesisroyaltydaycare.com";
 
   return (
     <footer className="mt-20 border-t bg-white">
@@ -16,10 +15,11 @@ export default function Footer() {
           <p className="mt-3 text-sm text-gray-600">Royal standard of care in Purcellville, VA.</p>
           <p className="mt-2 text-sm text-gray-600">37018 Glendale St., Purcellville, VA 20132</p>
           <p className="mt-2">
-            <a className="text-royalRed font-semibold" href={`tel:${phone}`}>{phone}</a><br/>
+            {phone && (<a className="text-royalRed font-semibold" href={`tel:${phone}`}>{phone}</a>)}<br/>
             <a className="text-royalPurple" href={`mailto:${info}`}>{info}</a>
           </p>
         </div>
+
         <div>
           <h4 className="font-bold mb-3">Explore</h4>
           <ul className="grid gap-2 text-sm">
@@ -28,20 +28,21 @@ export default function Footer() {
             <li><Link href="/activities">Daily Activities</Link></li>
             <li><Link href="/book-tour">Book a Tour</Link></li>
             <li><Link href="/counseling">Online Counseling</Link></li>
-            <li><Link href="/jobs">Jobs</Link></li>
             <li><Link href="/payments">Payments</Link></li>
-            <li><Link href="/jobs">Jobs</Link></li>
             <li><Link href="/portal">Parent Portal</Link></li>
+            <li><Link href="/jobs">Jobs</Link></li>
+            <li><Link href="/contact">Contact</Link></li>
           </ul>
         </div>
+
         <div>
           <h4 className="font-bold mb-3">Parents</h4>
           <ul className="grid gap-2 text-sm">
-            <li><Link href="/contact">Contact</Link></li>
             <li><a href="#policies">Policies</a></li>
             <li><a href="#faq">FAQ</a></li>
           </ul>
         </div>
+
         <div>
           <h4 className="font-bold mb-3">Payments</h4>
           <ul className="grid gap-2 text-sm">
@@ -52,10 +53,15 @@ export default function Footer() {
           </ul>
         </div>
       </div>
+
       <div className="border-t">
         <div className="container-p py-6 text-sm text-gray-600 flex items-center justify-between">
           <p>© {new Date().getFullYear()} Genesis Royalty Daycare Center LLC. All rights reserved.</p>
-          <p><a className="font-semibold hover:underline" href="https://visnec-it.com" target="_blank" rel="noreferrer">Powered by Visnec Global</a></p>
+          <p>
+            <a className="font-semibold hover:underline" href="https://visnec-it.com" target="_blank" rel="noreferrer">
+              Powered by Visnec Global
+            </a>
+          </p>
         </div>
       </div>
     </footer>
