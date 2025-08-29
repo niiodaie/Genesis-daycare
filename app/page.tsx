@@ -27,32 +27,22 @@ export default function HomePage() {
 
       {/* 3-card highlights */}
       <section className="py-10">
-        <KidsGallery />  {/* 👈 new kid-friendly image strip */}
-        <div className="container-p grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {[
-            {
-              title: "Playful learning",
-              desc:
-                "Children learn best through play—our days are filled with rich, age-appropriate exploration.",
-            },
-            {
-              title: "Health & safety first",
-              desc:
-                "Hygiene habits, secure check-in, and attentive staff keep little ones safe and thriving.",
-            },
-            {
-              title: "Family connection",
-              desc:
-                "Daily updates through our parent app and a warm, open-door relationship with families.",
-            },
-          ].map((c) => (
-            <div key={c.title} className="rounded-2xl border bg-white p-6 shadow-sm">
-              <h3 className="text-xl font-semibold text-royalBlue">{c.title}</h3>
-              <p className="mt-2 text-slate-700">{c.desc}</p>
-            </div>
-          ))}
-        </div>
-      </section>
+  <div className="container-p grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+    {[
+      { title: "Playful learning", desc: "Children learn best through play—our days are filled with rich, age-appropriate exploration." },
+      { title: "Health & safety first", desc: "Hygiene habits, secure check-in, and attentive staff keep little ones safe and thriving." },
+      { title: "Family connection", desc: "Daily updates through our parent app and a warm, open-door relationship with families." },
+    ].map((c) => (
+      <div key={c.title} className="rounded-2xl border bg-white p-6 shadow-sm">
+        <h3 className="text-xl font-semibold text-royalBlue">{c.title}</h3>
+        <p className="mt-2 text-slate-700">{c.desc}</p>
+      </div>
+    ))}
+  </div>
+</section>
+
+{/* 👇 new kid-friendly image strip */}
+<KidsGallery />
 
       {/* Programs */}
       <section className="py-14 bg-slate-50">
