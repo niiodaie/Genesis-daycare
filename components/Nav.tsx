@@ -24,27 +24,34 @@ export default function Nav() {
 
   return (
     <header className="sticky top-0 z-40 bg-white/90 backdrop-blur supports-[backdrop-filter]:bg-white/70 border-b shadow-sm">
-      <div className="container-p flex items-center justify-between py-3">
-        {/* Logo + wordmark (Option A) */}
-        <Link href="/" aria-label="Genesis Royalty Daycare — Home" className="flex items-center gap-3">
-          <span className="grid place-items-center rounded-xl bg-white ring-2 ring-royalYellow/60 p-1 shadow-soft shrink-0">
+      {/* ↑ subtle shadow so brand sits above hero */}
+      <div className="container-p flex items-center justify-between py-4 md:py-5">
+        {/* BRAND — bigger icon + bigger wordmark */}
+        <Link href="/" aria-label="Genesis Royalty Daycare — Home" className="flex items-center gap-4 md:gap-5">
+          {/* Icon—bigger, crisp, not boxed in */}
+          <span className="grid place-items-center rounded-2xl bg-white p-1.5 shadow-soft shrink-0 ring-1 ring-royalYellow/30">
             <Image
-              src="/logo-mark.png"              // square icon in /public
+              src="/logo-mark.png"                 // square icon in /public
               alt="Genesis Royalty logo"
-              width={56}
-              height={56}
+              width={72} height={72}               // retina-crisp
               priority
-              className="h-10 w-10 sm:h-12 sm:w-12 object-contain saturate-125 contrast-110 brightness-110"
+              className="h-12 w-12 sm:h-14 sm:w-14 md:h-16 md:w-16 object-contain saturate-125 contrast-110 brightness-110"
             />
           </span>
+
+          {/* Wordmark—larger to match original site feel (hidden on xs) */}
           <span className="hidden sm:block leading-tight select-none">
-            <span className="block text-lg sm:text-xl font-extrabold tracking-tight text-royalRed">GENESIS</span>
-            <span className="block -mt-1 text-base sm:text-lg font-extrabold tracking-tight text-royalYellow">ROYALTY</span>
+            <span className="block text-2xl md:text-3xl font-extrabold tracking-tight text-royalRed">
+              GENESIS
+            </span>
+            <span className="block -mt-1 text-xl md:text-2xl font-extrabold tracking-tight text-royalYellow">
+              ROYALTY
+            </span>
           </span>
         </Link>
 
         {/* Desktop nav */}
-        <nav className="hidden md:flex items-center gap-6">
+        <nav className="hidden md:flex items-center gap-5">
           {links.map((l) => (
             <Link
               key={l.href}
