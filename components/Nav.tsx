@@ -20,20 +20,20 @@ export default function Nav() {
 
   return (
     <header className="sticky top-0 z-40 bg-white/80 backdrop-blur supports-[backdrop-filter]:bg-white/60 border-b">
-      <div className="container-p flex items-center justify-between py-4">
-        {/* Logo — crisp, no stretching */}
+      <div className="container-p flex items-center justify-between py-3">{/* slightly tighter to match target site */}
+        {/* Logo — matched to current site visual size */}
         <Link href="/" aria-label="Genesis Royalty Daycare Home" className="flex items-center gap-2">
-  <span className="relative h-10 w-10 sm:h-12 sm:w-12 lg:h-14 lg:w-14 shrink-0">
-    <Image
-      src="/logo-mark.png"   // or "/logo.png" if you prefer the full wordmark
-      alt="Genesis Royalty Daycare"
-      fill
-      sizes="(min-width:1024px) 56px, (min-width:640px) 48px, 40px"
-      priority
-      className="object-contain"
-    />
-  </span>
-</Link>
+          <span className="relative h-10 w-10 sm:h-12 sm:w-12 lg:h-14 lg:w-14 shrink-0">
+            <Image
+              src="/logo-mark.png"   /* use the square mark we added to /public */
+              alt="Genesis Royalty Daycare"
+              fill
+              sizes="(min-width:1024px) 56px, (min-width:640px) 48px, 40px"
+              priority
+              className="object-contain"
+            />
+          </span>
+        </Link>
 
         {/* Desktop nav */}
         <nav className="hidden md:flex items-center gap-6">
