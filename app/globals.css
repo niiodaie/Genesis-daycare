@@ -2,11 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ---------- Base tokens ---------- */
 :root {
   --bg: #ffffff;
   --fg: #111827;
 }
 
+/* Page base */
 html, body {
   min-height: 100%;
   color: var(--fg);
@@ -15,22 +17,79 @@ html, body {
   font-feature-settings: "ss01" on, "liga" on;
 }
 
+/* Subtle ambient background splashes (used behind sections) */
 .gradient-splash {
-  background: radial-gradient(1200px circle at 10% 10%, rgba(52,195,195,.15), transparent 60%),
-              radial-gradient(800px circle at 80% 10%, rgba(247,197,49,.18), transparent 60%),
-              radial-gradient(900px circle at 50% 90%, rgba(155,109,227,.14), transparent 60%);
+  background:
+    radial-gradient(1200px circle at 10% 10%, rgba(52,195,195,.15), transparent 60%),
+    radial-gradient(800px circle at 80% 10%, rgba(247,197,49,.18), transparent 60%),
+    radial-gradient(900px circle at 50% 90%, rgba(155,109,227,.14), transparent 60%);
 }
 
-.btn {
-  @apply inline-flex items-center gap-2 rounded-2xl px-5 py-3 font-semibold shadow-soft transition hover:translate-y-[-1px] hover:shadow-lg;
+/* ---------- Utilities ---------- */
+
+/* Soft elevation used by cards/buttons/hero wrappers */
+.shadow-soft {
+  box-shadow:
+    0 1px 2px rgba(0,0,0,.06),
+    0 8px 24px rgba(0,0,0,.08);
 }
-.btn-primary {
-  @apply bg-royalRed text-white;
-}
-.btn-outline {
-  @apply border border-royalRed text-royalRed bg-white;
-}
+
+/* Container with comfortable padding */
 .container-p { @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8; }
+
+/* Badge */
 .badge { @apply inline-block rounded-full bg-royalYellow/20 text-royalYellow px-3 py-1 text-sm font-semibold; }
-.card { @apply rounded-3xl bg-white shadow-soft p-6; }
-heading { @apply font-display; }
+
+/* Card */
+.card { @apply rounded-3xl bg-white p-6 shadow-soft; }
+
+/* Heading helper (fix: was 'heading' element selector before) */
+.heading { @apply font-display; }
+
+/* Aspect-ratio fallback if tailwind aspect plugin isn't enabled */
+.aspect-video {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%; /* 16:9 */
+}
+.aspect-video > * {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* ---------- Buttons ---------- */
+
+.btn {
+  @apply inline-flex items-center gap-2 rounded-2xl px-5 py-3 font-semibold transition;
+  @apply hover:-translate-y-[1px];
+  box-shadow:
+    0 1px 2px rgba(0,0,0,.06),
+    0 6px 18px rgba(0,0,0,.06);
+}
+.btn:hover { box-shadow: 0 1px 2px rgba(0,0,0,.06), 0 10px 28px rgba(0,0,0,.12); }
+
+.btn-primary { @apply bg-royalRed text-white; }
+
+/* Outline on light backgrounds */
+.btn-outline { @apply border border-royalRed text-royalRed bg-white; }
+
+/* Light solid on colored/dark backgrounds */
+.btn-light { @apply bg-white text-slate-900; }
+
+/* Ghost on colored/dark backgrounds */
+.btn-ghost {
+  @apply text-white;
+  border: 1px solid rgba(255,255,255,.4);
+  background: transparent;
+}
+.btn-ghost:hover { background: rgba(255,255,255,.08); }
+
+/* Ghost with stronger contrast (used on deep hero) */
+.btn-ghost-white {
+  @apply text-white;
+  border: 1px solid rgba(255,255,255,.5);
+  background: transparent;
+}
+.btn-ghost-white:hover { background: rgba(255,255,255,.10); }
