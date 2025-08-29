@@ -93,3 +93,20 @@ html, body {
   background: transparent;
 }
 .btn-ghost-white:hover { background: rgba(255,255,255,.10); }
+
+/* Hide horizontal scrollbar while keeping scrollability (for KidsGallery) */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* Respect reduced motion: tone down hover lift on buttons */
+@media (prefers-reduced-motion: reduce) {
+  .btn { transform: none !important; }
+}
+
+/* Accessible focus ring for keyboard users */
+.focus-ring:focus-visible {
+  outline: 2px solid rgba(233,48,45,.6); /* royalRed */
+  outline-offset: 2px;
+  border-radius: 12px;
+}
+
