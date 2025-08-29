@@ -26,17 +26,24 @@ export default function Nav() {
     <header className="sticky top-0 z-40 bg-white/90 backdrop-blur supports-[backdrop-filter]:bg-white/70 border-b shadow-sm">
       <div className="container-p flex items-center justify-between py-4 md:py-5">
         {/* BRAND — large icon + wordmark (Option A) */}
-        <Link href="/" aria-label="Genesis Royalty Daycare — Home" className="flex items-center gap-4 md:gap-5 min-w-0">
-          {/* Icon — larger, crisp, subtle ring (no heavy box) */}
-          <span className="grid place-items-center rounded-2xl bg-white p-1.5 shadow-soft shrink-0 ring-1 ring-royalYellow/30">
-            <Image
-              src="/logo-mark.png"                              // square icon in /public
-              alt="Genesis Royalty logo"
-              width={80} height={80}                            // render size; crisp on retina
-              priority
-              className="h-12 w-12 sm:h-14 sm:w-14 md:h-16 md:w-16 xl:h-20 xl:w-20 object-contain saturate-125 contrast-110 brightness-110"
-            />
-          </span>
+        {/* BRAND — full original logo inside a big rounded box */}
+<Link
+  href="/"
+  aria-label="Genesis Royalty Daycare — Home"
+  className="flex items-center gap-4 md:gap-5 min-w-0"
+>
+  <span className="grid place-items-center rounded-2xl bg-white p-2 md:p-3 shadow-soft ring-2 ring-royalYellow/60 shrink-0">
+    <Image
+      src="/logo-transparent.png"            // full logo; use this for a clean edge
+      // you can switch to "/logo.png" if you prefer the white background one
+      alt="Genesis Royalty Daycare Center LLC"
+      width={240}
+      height={80}
+      priority
+      className="h-12 sm:h-14 md:h-16 lg:h-18 xl:h-20 w-auto object-contain saturate-125 contrast-110 brightness-110"
+    />
+  </span>
+</Link>
 
           {/* Wordmark — big like the original site (hidden on xs) */}
           <span className="hidden sm:block leading-tight select-none truncate">
