@@ -25,23 +25,35 @@ export default function Nav() {
   return (
     <header className="sticky top-0 z-40 bg-white/90 backdrop-blur supports-[backdrop-filter]:bg-white/70 border-b shadow-sm">
       <div className="container-p flex items-center justify-between py-5">
-        {/* BRAND — full original logo, big inside a soft box */}
-        <Link
-          href="/"
-          aria-label="Genesis Royalty Daycare — Home"
-          className="flex items-center min-w-0"
-        >
-          <span className="grid place-items-center rounded-2xl bg-white p-2 md:p-3 shadow-soft ring-2 ring-royalYellow/60 shrink-0">
-            <Image
-              src="/logo-transparent.png" // or "/logo.png" if you prefer the white-backed version
-              alt="Genesis Royalty Daycare Center LLC"
-              width={280}
-              height={96}
-              priority
-              className="h-12 sm:h-14 md:h-16 lg:h-20 xl:h-24 w-auto object-contain saturate-125 contrast-110 brightness-110"
-            />
-          </span>
-        </Link>
+       {/* BRAND — icon in box + text to the right */}
+<Link
+  href="/"
+  aria-label="Genesis Royalty Daycare — Home"
+  className="flex items-center gap-4 md:gap-5 min-w-0"
+>
+  {/* Icon in soft box */}
+  <span className="grid place-items-center rounded-2xl bg-white p-2 md:p-3 shadow-soft ring-2 ring-royalYellow/60 shrink-0">
+    <Image
+      src="/logo-mark.png"                // square icon from /public
+      alt="Genesis Royalty logo"
+      width={80}
+      height={80}
+      priority
+      className="h-12 w-12 sm:h-14 sm:w-14 md:h-16 md:w-16 object-contain saturate-125 contrast-110 brightness-110"
+    />
+  </span>
+
+  {/* Wordmark */}
+  <span className="hidden sm:block leading-tight select-none">
+    <span className="block text-2xl md:text-3xl font-extrabold tracking-tight text-royalRed">
+      GENESIS
+    </span>
+    <span className="block -mt-1 text-xl md:text-2xl font-extrabold tracking-tight text-royalYellow">
+      ROYALTY
+    </span>
+  </span>
+</Link>
+
 
         {/* Desktop nav (start at lg so the brand has space) */}
         <nav className="hidden lg:flex items-center gap-5 xl:gap-6">
