@@ -1,4 +1,5 @@
 import HeroVideo from "@/components/HeroVideo";
+import FamilyFeedback from "@/components/FamilyFeedback";
 import Link from "next/link";
 
 export default function HomePage() {
