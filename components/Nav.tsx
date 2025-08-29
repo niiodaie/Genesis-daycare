@@ -34,18 +34,31 @@ export default function Nav() {
     <header className="sticky top-0 z-40 bg-white/80 backdrop-blur supports-[backdrop-filter]:bg-white/60 border-b">
       <div className="container-p flex items-center justify-between py-3">
         {/* Logo */}
-        <Link href="/" aria-label="Genesis Royalty Daycare — Home" className="flex items-center gap-2">
-          <span className="relative h-10 w-10 sm:h-12 sm:w-12 lg:h-14 lg:w-14 shrink-0">
-            <Image
-              src="/logo-mark.png"
-              alt="Genesis Royalty Daycare"
-              fill
-              sizes="(min-width:1024px) 56px, (min-width:640px) 48px, 40px"
-              priority
-              className="object-contain"
-            />
-          </span>
-        </Link>
+        {/* Logo + wordmark */}
+<Link href="/" aria-label="Genesis Royalty Daycare — Home" className="flex items-center gap-3">
+  {/* mark */}
+  <span className="relative h-10 w-10 sm:h-12 sm:w-12 lg:h-14 lg:w-14 shrink-0">
+    <Image
+      src="/logo-transparent.png"            // use the transparent background version
+      alt="Genesis Royalty logo"
+      fill
+      priority
+      sizes="(min-width:1024px) 56px, (min-width:640px) 48px, 40px"
+      className="object-contain drop-shadow-md saturate-125 contrast-110 brightness-110"
+    />
+  </span>
+
+  {/* wordmark */}
+  <span className="hidden sm:block leading-tight select-none">
+    <span className="block text-lg sm:text-xl lg:text-2xl font-extrabold tracking-tight text-royalRed">
+      GENESIS
+    </span>
+    <span className="block -mt-1 text-base sm:text-lg lg:text-xl font-extrabold tracking-tight text-royalYellow">
+      ROYALTY
+    </span>
+  </span>
+</Link>
+
 
         {/* Desktop nav */}
         <nav className="hidden md:flex items-center gap-6">
