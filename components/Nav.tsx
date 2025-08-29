@@ -1,31 +1,43 @@
 "use client";
+
 import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
-import { Phone } from "lucide-react";
+import { usePathname } from "next/navigation";
 
 const links = [
-  { href: "/about", label: "About" },
+  { href: "/", label: "Home" },
   { href: "/programs", label: "Programs" },
   { href: "/activities", label: "Daily Activities" },
   { href: "/book-tour", label: "Book a Tour" },
-  { href: "/payments", label: "Payments" },
-  { href: "/portal", label: "Parent Portal" },
+  { href: "/payments", label: "Payment" },     // keep route /payments
+  { href: "/portal", label: "MyGenesis" },     // renamed from Parent Portal
+  { href: "/about", label: "About" },
   { href: "/contact", label: "Contact" },
 ];
 
 export default function Nav() {
   const [open, setOpen] = useState(false);
-  const phone = process.env.NEXT_PUBLIC_PHONE || "";
+  const pathname = usePathname();
+
+  const isActive = (href: string) => {
+    if (href === "/") return pathname === "/";
+    return pathname.startsWith(href);
+  };
+
+  const baseLink =
+    "text-sm font-semibold transition hover:text-royalRed";
+  const active =
+    "text-royalRed";
 
   return (
     <header className="sticky top-0 z-40 bg-white/80 backdrop-blur supports-[backdrop-filter]:bg-white/60 border-b">
-      <div className="container-p flex items-center justify-between py-3">{/* slightly tighter to match target site */}
-        {/* Logo — matched to current site visual size */}
-        <Link href="/" aria-label="Genesis Royalty Daycare Home" className="flex items-center gap-2">
+      <div className="container-p flex items-center justify-between py-3">
+        {/* Logo */}
+        <Link href="/" aria-label="Genesis Royalty Daycare — Home" className="flex items-center gap-2">
           <span className="relative h-10 w-10 sm:h-12 sm:w-12 lg:h-14 lg:w-14 shrink-0">
             <Image
-              src="/logo-mark.png"   /* use the square mark we added to /public */
+              src="/logo-mark.png"
               alt="Genesis Royalty Daycare"
               fill
               sizes="(min-width:1024px) 56px, (min-width:640px) 48px, 40px"
@@ -38,20 +50,29 @@ export default function Nav() {
         {/* Desktop nav */}
         <nav className="hidden md:flex items-center gap-6">
           {links.map((l) => (
-            <Link key={l.href} href={l.href} className="text-sm font-semibold hover:text-royalRed">
+            <Link
+              key={l.href}
+              href={l.href}
+              className={`${baseLink} ${isActive(l.href) ? active : ""}`}
+            >
               {l.label}
             </Link>
           ))}
-          <Link href="/book-tour" className="btn btn-primary text-sm">Enroll Now</Link>
-          {phone && (
-            <a href={`tel:${phone}`} className="inline-flex items-center gap-2 font-semibold">
-              <Phone className="w-4 h-4" /> Call
-            </a>
-          )}
+
+          {/* CTA */}
+          <Link href="/book-tour" className="btn btn-primary text-sm">
+            Enroll
+          </Link>
         </nav>
 
         {/* Mobile menu button */}
-        <button className="md:hidden" onClick={() => setOpen(!open)} aria-label="Toggle menu">
+        <button
+          className="md:hidden"
+          onClick={() => setOpen(!open)}
+          aria-label="Toggle menu"
+          aria-expanded={open}
+          aria-controls="mobile-nav"
+        >
           <div className="w-6 h-0.5 bg-black mb-1" />
           <div className="w-6 h-0.5 bg-black mb-1" />
           <div className="w-6 h-0.5 bg-black" />
@@ -60,14 +81,21 @@ export default function Nav() {
 
       {/* Mobile menu */}
       {open && (
-        <div className="md:hidden border-t bg-white">
+        <div id="mobile-nav" className="md:hidden border-t bg-white">
           <div className="container-p py-4 grid gap-3">
             {links.map((l) => (
-              <Link key={l.href} href={l.href} className="py-2 border-b" onClick={() => setOpen(false)}>
+              <Link
+                key={l.href}
+                href={l.href}
+                className={`py-2 border-b ${isActive(l.href) ? "text-royalRed font-semibold" : ""}`}
+                onClick={() => setOpen(false)}
+              >
                 {l.label}
               </Link>
             ))}
-            <Link href="/book-tour" className="btn btn-primary text-center">Enroll Now</Link>
+            <Link href="/book-tour" className="btn btn-primary text-center" onClick={() => setOpen(false)}>
+              Enroll
+            </Link>
           </div>
         </div>
       )}
