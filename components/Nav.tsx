@@ -23,17 +23,17 @@ export default function Nav() {
       <div className="container-p flex items-center justify-between py-4">
         {/* Logo — crisp, no stretching */}
         <Link href="/" aria-label="Genesis Royalty Daycare Home" className="flex items-center gap-2">
-          <span className="relative h-12 w-12 shrink-0">
-            <Image
-              src="/logo-mark.png"     // <-- use the square mark
-              alt="Genesis Royalty Daycare"
-              fill
-              sizes="48px"
-              priority
-              className="object-contain"
-            />
-          </span>
-        </Link>
+  <span className="relative h-10 w-10 sm:h-12 sm:w-12 lg:h-14 lg:w-14 shrink-0">
+    <Image
+      src="/logo-mark.png"   // or "/logo.png" if you prefer the full wordmark
+      alt="Genesis Royalty Daycare"
+      fill
+      sizes="(min-width:1024px) 56px, (min-width:640px) 48px, 40px"
+      priority
+      className="object-contain"
+    />
+  </span>
+</Link>
 
         {/* Desktop nav */}
         <nav className="hidden md:flex items-center gap-6">
