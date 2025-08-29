@@ -1,13 +1,15 @@
 import type { Config } from "tailwindcss";
+import aspectRatio from "@tailwindcss/aspect-ratio"; // <- optional
 
 export default {
   content: [
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
-    "./components/**/*.{js,ts,jsx,tsx,mdx}"
+    "./components/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
     extend: {
       colors: {
+        royalBlue: "#002855",       // <-- add this (used by hero/sections)
         royalRed: "#E9302D",
         royalYellow: "#F7C531",
         royalPurple: "#9B6DE3",
@@ -19,9 +21,11 @@ export default {
         body: ["Nunito", "ui-sans-serif", "system-ui"],
       },
       boxShadow: {
-        soft: "0 10px 30px rgba(0,0,0,0.08)"
-      }
+        soft: "0 10px 30px rgba(0,0,0,0.08)", // enables `shadow-soft`
+      },
     },
   },
-  plugins: [],
+  plugins: [
+    aspectRatio, // optional
+  ],
 } satisfies Config;
