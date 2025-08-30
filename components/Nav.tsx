@@ -44,15 +44,16 @@ export default function Nav() {
           </span>
 
           {/* Wordmark + subtitle */}
-          <span className="hidden sm:block select-none leading-none">
-            <span className="block text-2xl md:text-3xl font-extrabold tracking-tight text-royalRed">
+          <span className="hidden sm:block select-none">
+            <span className="flex items-baseline gap-2 leading-none whitespace-nowrap">
+              <span className="text-2xl md:text-3xl font-extrabold tracking-tight text-royalRed">
               GENESIS
             </span>
-            <span className="block -mt-1 text-2xl md:text-3xl font-extrabold tracking-tight text-royalYellow">
+            <span className="text-2xl md:text-3xl font-extrabold tracking-tight text-royalYellow">
               ROYALTY
             </span>
-            <span className="block mt-1 text-[11px] md:text-xs font-extrabold uppercase tracking-[0.35em] text-royalPurple/90">
-              DAYCARE CENTER LLC
+             <span className="block mt-1 text-[11px] md:text-xs font-extrabold uppercase tracking-[0.35em] text-royalPurple/90 whitespace-nowrap">
+              DAYCARE CENTER
             </span>
           </span>
         </Link>
