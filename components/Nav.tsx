@@ -25,23 +25,35 @@ export default function Nav() {
   return (
     <header className="sticky top-0 z-40 bg-white/90 backdrop-blur supports-[backdrop-filter]:bg-white/70 border-b shadow-sm">
       <div className="container-p flex items-center justify-between py-5">
-       {/* BRAND — icon in box + text to the right */}
+       {/* BRAND — icon blown up to edges inside the box */}
 <Link
   href="/"
   aria-label="Genesis Royalty Daycare — Home"
-  className="flex items-center gap-4 md:gap-5 min-w-0"
+  className="flex items-center min-w-0"
 >
-  {/* Icon in soft box */}
-  <span className="grid place-items-center rounded-2xl bg-white p-2 md:p-3 shadow-soft ring-2 ring-royalYellow/60 shrink-0">
+  <span
+    className="
+      relative overflow-hidden shrink-0
+      rounded-2xl bg-white ring-2 ring-royalYellow/60 shadow-soft
+      h-16 w-16 sm:h-20 sm:w-20 md:h-24 md:w-24
+    "
+  >
     <Image
-      src="/logo-mark.png"                // square icon from /public
+      src="/logo-mark.png"               // <-- use your tightest-crop icon
       alt="Genesis Royalty logo"
-      width={80}
-      height={80}
+      fill                               // <-- lets the image fill the box
       priority
-      className="h-12 w-12 sm:h-14 sm:w-14 md:h-16 md:w-16 object-contain saturate-125 contrast-110 brightness-110"
+      sizes="(min-width:768px) 96px, (min-width:640px) 80px, 64px"
+      className="
+        object-contain object-center
+        /* 'blow out' a bit so it visually touches the rounded box edges */
+        scale-[1.18]                     /* bump up or down (1.10–1.25) */
+        [image-rendering:-webkit-optimize-contrast]
+      "
     />
   </span>
+</Link>
+
 
   {/* Wordmark */}
   <span className="hidden sm:block leading-tight select-none">
