@@ -1,36 +1,35 @@
-'use client'
-import { useState } from 'react'
-import { supabase } from '@/lib/supabaseClient'
-import { useRouter } from 'next/navigation'
+import { loginAction } from './actions';
+import { getSession } from '@/lib/auth';
+import { redirect } from 'next/navigation';
 
-export default function LoginPage() {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [loading, setLoading] = useState(false)
-  const [err, setErr] = useState('')
-  const router = useRouter()
+export default function LoginPage({ searchParams }: { searchParams: { next?: string } }) {
+  const session = getSession();
+  if (session) redirect('/portal');
 
-  async function onSubmit(e: React.FormEvent) {
-    e.preventDefault()
-    setLoading(true); setErr('')
-    try {
-      if (!supabase) throw new Error('Supabase env vars missing')
-      const { error } = await supabase.auth.signInWithPassword({ email, password })
-      if (error) throw error
-      router.replace('/portal')
-    } catch (e:any) { setErr(e.message) } finally { setLoading(false) }
-  }
+  const next = searchParams?.next ?? '/portal';
 
   return (
-    <div className="py-10 max-w-md mx-auto">
-      <h1 className="text-3xl font-extrabold font-display text-center">Parent Login</h1>
-      <form onSubmit={onSubmit} className="card mt-6 grid gap-3">
-        <input type="email" required className="rounded-xl border px-4 py-3" placeholder="Email" value={email} onChange={e=>setEmail(e.target.value)} />
-        <input type="password" required className="rounded-xl border px-4 py-3" placeholder="Password" value={password} onChange={e=>setPassword(e.target.value)} />
-        <button className="btn btn-primary" disabled={loading}>{loading ? 'Signing in…' : 'Sign In'}</button>
-        {err && <p className="text-red-600">{err}</p>}
-        <p className="text-sm text-gray-600">Need an account? Contact the office to be invited.</p>
+    <div className="max-w-md mx-auto py-10">
+      <h1 className="text-2xl font-bold">Sign in to MyGenesis</h1>
+      <p className="text-slate-600 mt-2">Use the demo accounts while we connect Supabase:</p>
+      <ul className="text-sm text-slate-600 mt-1 list-disc pl-5">
+        <li>Parent: <code>parent@genesis.test</code> / <code>demo123</code></li>
+        <li>Staff: <code>staff@genesis.test</code> / <code>demo123</code></li>
+        <li>Admin: <code>admin@genesis.test</code> / <code>demo123</code></li>
+      </ul>
+
+      <form action={loginAction} className="mt-6 grid gap-4">
+        <input type="hidden" name="next" value={next} />
+        <div className="grid gap-2">
+          <label className="text-sm font-semibold">Email</label>
+          <input name="email" type="email" required className="border rounded-xl px-3 py-2" placeholder="you@example.com" />
+        </div>
+        <div className="grid gap-2">
+          <label className="text-sm font-semibold">Password</label>
+          <input name="password" type="password" required className="border rounded-xl px-3 py-2" />
+        </div>
+        <button className="btn btn-primary">Sign in</button>
       </form>
     </div>
-  )
+  );
 }
