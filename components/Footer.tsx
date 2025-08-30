@@ -64,7 +64,6 @@ export default function Footer() {
             {!hideSocial && <SocialLinks className="mt-4" size={28} />}
           </div>
 
-          {/* Columns 2–4: your existing Explore / Parents / Payments sections */}
           {/* Column 2 (Explore) */}
           <div>
             <h4 className="font-semibold text-slate-900">Explore</h4>
@@ -105,24 +104,31 @@ export default function Footer() {
         </div>
 
         {/* Bottom bar */}
-<div className="mt-8 border-t pt-6 text-sm text-slate-500 flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
-  <span>© {year} Genesis Royalty Daycare Center. All rights reserved.</span>
+        <div className="mt-8 border-t pt-6 text-sm text-slate-500 flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+          <span>© {year} Genesis Royalty Daycare Center. All rights reserved.</span>
 
-  <span className="flex items-center gap-2">
-    Powered by{" "}
-    <a
-      href="https://visnec-it.com"
-      target="_blank"
-      rel="noreferrer"
-      className="hover:underline font-medium text-slate-700"
-    >
-      Visnec Global
-    </a>
-    <span aria-hidden>—</span>
-    {/* Change "The" to "Your" if you prefer that voice */}
-    <span className="whitespace-nowrap">
-      The <span className="text-[0.85em]">Technology</span> Partner
-    </span>
-  </span>
-</div>
-
+          <span className="flex items-center gap-2">
+            Powered by{" "}
+            <a
+              href="https://visnec-it.com"
+              target="_blank"
+              rel="noreferrer"
+              className="hover:underline font-medium text-slate-700"
+            >
+              Visnec Global
+            </a>
+            <span aria-hidden>—</span>
+            <span className="whitespace-nowrap">
+              The <span className="text-[0.85em]">Technology</span> Partner
+            </span>
+            {/* If you prefer the more personal voice:
+            <span className="whitespace-nowrap">
+              Your <span className="text-[0.85em]">Technology</span> Partner
+            </span>
+            */}
+          </span>
+        </div>
+      </div>
+    </footer>
+  );
+}
