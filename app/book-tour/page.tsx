@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import CalendlyEmbed from "@/components/CalendlyEmbed";
+import PhotoSlider from "@/components/PhotoSlider"; // ← NEW: autoplay slider
 
 export const metadata: Metadata = {
   title: "Book a Tour | Genesis Royalty Daycare Center",
@@ -37,10 +37,9 @@ export default function BookTourPage() {
         </div>
       </section>
 
-      {/* QUICK PEEK VIDEO (optional) */}
+      {/* QUICK PEEK VIDEO */}
       <section id="peek" className="container-p mt-10">
         <div className="rounded-2xl overflow-hidden shadow-soft aspect-video bg-slate-100">
-          {/* If /public/videos/tour.mp4 exists it will play; otherwise the poster shows. */}
           <video
             className="h-full w-full object-cover"
             autoPlay
@@ -58,7 +57,7 @@ export default function BookTourPage() {
         </p>
       </section>
 
-      {/* GALLERY */}
+      {/* GALLERY — autoplay slider */}
       <section className="container-p mt-10">
         <h2 className="text-2xl md:text-3xl font-bold">A look inside</h2>
         <p className="mt-2 text-slate-600">
@@ -66,19 +65,18 @@ export default function BookTourPage() {
           happy, safe learning.
         </p>
 
-        <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          <figure className="relative aspect-[16/10] overflow-hidden rounded-2xl shadow-soft">
-            <Image src="/children-playing.jpg" alt="Outdoor play area" fill className="object-cover" />
-          </figure>
-          <figure className="relative aspect-[16/10] overflow-hidden rounded-2xl shadow-soft">
-            <Image src="/hero-image-1.jpg" alt="Toddler classroom" fill className="object-cover" />
-          </figure>
-          <figure className="relative aspect-[16/10] overflow-hidden rounded-2xl shadow-soft">
-            <Image src="/hero-image-2.jpg" alt="Creative corner" fill className="object-cover" />
-          </figure>
-          <figure className="relative aspect-[16/10] overflow-hidden rounded-2xl shadow-soft sm:col-span-2">
-            <Image src="/hero-image-3.jpg" alt="Preschool group activity" fill className="object-cover" />
-          </figure>
+        <div className="mt-6">
+          <PhotoSlider
+            caption="Genesis Royalty tour gallery"
+            autoplayMs={3800}
+            height={{ base: 220, sm: 260, md: 320, lg: 380 }}
+            slides={[
+              { src: "/children-playing.jpg", alt: "Outdoor play area" },
+              { src: "/hero-image-1.jpg", alt: "Toddler classroom creative table" },
+              { src: "/hero-image-2.jpg", alt: "Reading corner and soft play" },
+              { src: "/hero-image-3.jpg", alt: "Preschool group activity time" },
+            ]}
+          />
         </div>
       </section>
 
@@ -134,7 +132,7 @@ export default function BookTourPage() {
         </div>
       </section>
 
-      {/* MAP (optional simple embed) */}
+      {/* MAP */}
       <section className="container-p mt-12">
         <h3 className="text-xl font-bold">Find us</h3>
         <p className="mt-1 text-slate-600">
