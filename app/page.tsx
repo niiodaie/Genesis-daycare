@@ -25,7 +25,7 @@ const CFG = {
   CASHAPP_TAG: process.env.NEXT_PUBLIC_CASHAPP || "$GenesisRoyalty",
   ZELLE_EMAIL: process.env.NEXT_PUBLIC_ZELLE || "billing@genesisroyaltydaycare.com",
   APPLE_GOOGLE_NOTE:
-    "Available through our secure online checkout on compatible devices.",
+    "Apple Pay and Google Pay appear automatically on compatible devices during secure checkout.",
 };
 
 export default function PaymentsPage() {
@@ -33,16 +33,10 @@ export default function PaymentsPage() {
     <div className="py-10">
       <header className="container-p mb-8">
         <span className="badge">Tuition & Fees</span>
-        <h1 className="mt-2 text-3xl md:text-4xl font-bold">
-          Simple, safe ways to pay
-        </h1>
+        <h1 className="mt-2 text-3xl md:text-4xl font-bold">Simple, safe ways to pay</h1>
         <p className="mt-2 text-slate-600 max-w-2xl">
-          Choose the method that’s easiest for you. Card payments are processed
-          securely. If you need assistance, please{" "}
-          <Link href="/contact" className="text-royalRed font-semibold">
-            contact us
-          </Link>
-          .
+          Choose the method that’s easiest for you. Card payments are processed securely. Need help?{" "}
+          <Link href="/contact" className="text-royalRed font-semibold">Contact us</Link>.
         </p>
       </header>
 
@@ -56,20 +50,17 @@ export default function PaymentsPage() {
         >
           <div className="flex flex-wrap items-center gap-3">
             {CFG.CARD_LINK ? (
-              <a
-                href={CFG.CARD_LINK}
-                target="_blank"
-                rel="noreferrer"
-                className="btn btn-primary"
-              >
+              <a href={CFG.CARD_LINK} target="_blank" rel="noreferrer" className="btn btn-primary">
                 Pay with card <ArrowUpRight className="h-4 w-4" />
               </a>
             ) : (
               <div className="text-sm text-slate-500">
-                Add <code>NEXT_PUBLIC_PAY_LINK_CARD</code> to enable.
+                Add <code>NEXT_PUBLIC_PAY_LINK_CARD</code> to enable this button.
               </div>
             )}
-            <div className="flex items-center gap-1 opacity-70">
+
+            {/* Card brand marks */}
+            <div className="flex items-center gap-1 opacity-80">
               <Image src="/cards/visa.svg" alt="Visa" width={36} height={24} />
               <Image src="/cards/mastercard.svg" alt="Mastercard" width={36} height={24} />
               <Image src="/cards/amex.svg" alt="American Express" width={36} height={24} />
@@ -78,28 +69,23 @@ export default function PaymentsPage() {
           </div>
           <p className="mt-3 text-xs text-slate-500 flex items-center gap-2">
             <ShieldCheck className="h-4 w-4 text-emerald-600" />
-            Payments are encrypted end-to-end. Apple Pay and Google Pay are supported on compatible devices.
+            Encrypted end-to-end. Apple Pay & Google Pay appear during checkout on supported devices.
           </p>
         </PaymentCard>
 
+        {/* PayPal */}
         <PaymentCard
           id="paypal"
           title="PayPal"
           subtitle="Fast and familiar"
           icon={<Wallet className="h-5 w-5 text-royalYellow" />}
         >
-          <div className="flex items-center gap-3">
-            <a
-              href={CFG.PAYPAL_LINK}
-              target="_blank"
-              rel="noreferrer"
-              className="btn btn-outline"
-            >
-              Pay with PayPal <ArrowUpRight className="h-4 w-4" />
-            </a>
-          </div>
+          <a href={CFG.PAYPAL_LINK} target="_blank" rel="noreferrer" className="btn btn-outline">
+            Pay with PayPal <ArrowUpRight className="h-4 w-4" />
+          </a>
         </PaymentCard>
 
+        {/* Venmo */}
         <PaymentCard
           id="venmo"
           title="Venmo"
@@ -111,20 +97,21 @@ export default function PaymentsPage() {
               <div className="font-semibold">{CFG.VENMO_HANDLE}</div>
               <CopyButton value={CFG.VENMO_HANDLE} className="mt-2" />
             </div>
-            {/* Optional QR image (add to /public/qr/venmo.png) */}
+
+            {/* Use the SVG placeholder we created */}
             <div className="rounded-xl border p-2">
-              <div className="relative h-24 w-24">
-                <Image
-                  src="/qr/venmo.png"
-                  alt="Venmo QR"
-                  fill
-                  className="object-contain"
-                />
-              </div>
+              <Image
+                src="/qr/venmo.svg"
+                alt="Venmo QR"
+                width={96}
+                height={96}
+                className="object-contain"
+              />
             </div>
           </div>
         </PaymentCard>
 
+        {/* Cash App */}
         <PaymentCard
           id="cashapp"
           title="Cash App"
@@ -136,20 +123,19 @@ export default function PaymentsPage() {
               <div className="font-semibold">{CFG.CASHAPP_TAG}</div>
               <CopyButton value={CFG.CASHAPP_TAG} className="mt-2" />
             </div>
-            {/* Optional QR image (add to /public/qr/cashapp.png) */}
             <div className="rounded-xl border p-2">
-              <div className="relative h-24 w-24">
-                <Image
-                  src="/qr/cashapp.png"
-                  alt="Cash App QR"
-                  fill
-                  className="object-contain"
-                />
-              </div>
+              <Image
+                src="/qr/cashapp.svg"
+                alt="Cash App QR"
+                width={96}
+                height={96}
+                className="object-contain"
+              />
             </div>
           </div>
         </PaymentCard>
 
+        {/* Zelle */}
         <PaymentCard
           id="zelle"
           title="Zelle"
@@ -161,23 +147,20 @@ export default function PaymentsPage() {
               <div className="font-semibold">{CFG.ZELLE_EMAIL}</div>
               <CopyButton value={CFG.ZELLE_EMAIL} label="Copy email" className="mt-2" />
             </div>
-            {/* Optional QR image (add to /public/qr/zelle.png) */}
             <div className="rounded-xl border p-2">
-              <div className="relative h-24 w-24">
-                <Image
-                  src="/qr/zelle.png"
-                  alt="Zelle QR"
-                  fill
-                  className="object-contain"
-                />
-              </div>
+              <Image
+                src="/qr/zelle.svg"
+                alt="Zelle QR"
+                width={96}
+                height={96}
+                className="object-contain"
+              />
             </div>
           </div>
-          <p className="mt-3 text-xs text-slate-500">
-            Please include your child’s name in the memo.
-          </p>
+          <p className="mt-3 text-xs text-slate-500">Please include your child’s name in the memo.</p>
         </PaymentCard>
 
+        {/* Apple/Google Pay */}
         <PaymentCard
           id="applepay"
           title="Apple Pay / Google Pay"
@@ -186,12 +169,7 @@ export default function PaymentsPage() {
         >
           <p className="text-sm text-slate-600">{CFG.APPLE_GOOGLE_NOTE}</p>
           {CFG.CARD_LINK && (
-            <a
-              href={CFG.CARD_LINK}
-              target="_blank"
-              rel="noreferrer"
-              className="btn btn-outline mt-3"
-            >
+            <a href={CFG.CARD_LINK} target="_blank" rel="noreferrer" className="btn btn-outline mt-3">
               Open checkout <ArrowUpRight className="h-4 w-4" />
             </a>
           )}
@@ -202,8 +180,8 @@ export default function PaymentsPage() {
       <div className="container-p mt-8">
         <div className="rounded-2xl border p-4 text-xs text-slate-600 bg-white">
           <p>
-            <strong>Receipts:</strong> A receipt will be emailed to you. If you need
-            an itemized invoice, please request one via{" "}
+            <strong>Receipts:</strong> Your receipt will be emailed automatically. Need an itemized
+            invoice? Request one via{" "}
             <Link href="/contact" className="text-royalRed font-semibold">Contact</Link>.
           </p>
           <p className="mt-2">
