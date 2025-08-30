@@ -1,20 +1,19 @@
-'use client'
-import { useEffect, useState } from 'react'
-import { supabase } from './supabaseClient'
+'use client';
+import { useEffect, useState } from 'react';
+import type { Session } from './auth';
 
 export function useUser() {
-  const [session, setSession] = useState<any>(null)
-  const [loading, setLoading] = useState(true)
+  const [session, setSession] = useState<Session | null>(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (!supabase) { setLoading(false); return }
-    supabase.auth.getSession().then(({ data }) => {
-      setSession(data.session || null)
-      setLoading(false)
-    })
-    const { data: sub } = supabase.auth.onAuthStateChange((_event, sess) => setSession(sess))
-    return () => { sub.subscription.unsubscribe() }
-  }, [])
+    let alive = true;
+    fetch('/api/me')
+      .then((r) => r.json())
+      .then((d) => alive && setSession(d.session ?? null))
+      .finally(() => alive && setLoading(false));
+    return () => { alive = false; };
+  }, []);
 
-  return { session, loading, user: session?.user }
+  return { session, loading };
 }
