@@ -25,7 +25,7 @@ export default function Nav() {
   return (
     <header className="sticky top-0 z-40 bg-white/90 backdrop-blur supports-[backdrop-filter]:bg-white/70 border-b shadow-sm">
       <div className="container-p flex items-center justify-between py-5">
-        {/* BRAND — icon in box + stacked wordmark + subtitle (single link) */}
+        {/* BRAND — icon in box + single-line wordmark + subtitle */}
         <Link
           href="/"
           aria-label="Genesis Royalty Daycare — Home"
@@ -44,15 +44,18 @@ export default function Nav() {
           </span>
 
           {/* Wordmark + subtitle */}
-          <span className="hidden sm:block select-none">
-            <span className="flex items-baseline gap-2 leading-none whitespace-nowrap">
+          <span className="hidden sm:block select-none leading-none">
+            {/* Single line (no wrap) */}
+            <span className="inline-flex items-baseline gap-2 whitespace-nowrap leading-none">
               <span className="text-2xl md:text-3xl font-extrabold tracking-tight text-royalRed">
-              GENESIS
+                GENESIS
+              </span>
+              <span className="text-2xl md:text-3xl font-extrabold tracking-tight text-royalYellow">
+                ROYALTY
+              </span>
             </span>
-            <span className="text-2xl md:text-3xl font-extrabold tracking-tight text-royalYellow">
-              ROYALTY
-            </span>
-             <span className="block mt-1 text-[11px] md:text-xs font-extrabold uppercase tracking-[0.35em] text-royalPurple/90 whitespace-nowrap">
+            {/* Subtitle on its own line, no “LLC” */}
+            <span className="block mt-1 text-[11px] md:text-xs font-extrabold uppercase tracking-[0.35em] text-royalPurple/90 whitespace-nowrap">
               DAYCARE CENTER
             </span>
           </span>
