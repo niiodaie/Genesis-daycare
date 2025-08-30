@@ -1,32 +1,39 @@
+// app/contact/page.tsx
+import type { Metadata } from "next";
+import Link from "next/link";
 import ContactForm from "@/components/ContactForm";
-import MapEmbed from "@/components/MapEmbed";
+
+export const metadata: Metadata = {
+  title: "Contact | Genesis Royalty Daycare Center",
+  description:
+    "We’re here to help with enrollment, tuition, and questions. Call, email, or send us a message.",
+};
 
 export default function ContactPage() {
-  const phone = process.env.NEXT_PUBLIC_PHONE || "+1-540-555-1212";
-  const info = process.env.NEXT_PUBLIC_EMAIL_INFO || "info@genesisroyaltydaycare.com";
-  const support = process.env.NEXT_PUBLIC_EMAIL_SUPPORT || "support@genesisroyaltydaycare.com";
-
   return (
-    <div className="py-10">
-      <h1 className="text-4xl font-extrabold font-display">Contact</h1>
-      <p className="mt-4 text-gray-700">
-        We’re here to help with enrollment, tuition, and questions. Call, email, or send us a message.
-      </p>
+    <div className="pb-16">
+      <section className="container-p pt-8 md:pt-10">
+        <h1 className="text-3xl md:text-4xl font-extrabold heading">Contact</h1>
+        <p className="mt-2 max-w-2xl text-slate-700">
+          We’re here to help with enrollment, tuition, and questions. Call, email, or send us a message.
+        </p>
+      </section>
 
-      <div className="mt-8 grid md:grid-cols-2 gap-6">
+      <section className="container-p mt-6 grid gap-6 lg:grid-cols-2 items-start">
+        {/* Left: quick contact details (use your existing values) */}
         <div className="card">
-          <h3 className="font-bold">Reach Us</h3>
-          <p className="mt-2"><strong>Phone:</strong> <a className="text-royalRed" href={`tel:${phone}`}>{phone}</a></p>
-          <p className="mt-1"><strong>Info:</strong> <a className="text-royalPurple" href={`mailto:${info}`}>{info}</a></p>
-          <p className="mt-1"><strong>Support:</strong> <a className="text-royalPurple" href={`mailto:${support}`}>{support}</a></p>
-          <p className="mt-4 text-gray-700"><strong>Address:</strong> 37018 Glendale St., Purcellville, VA 20132</p>
+          <h2 className="text-xl font-bold">Reach Us</h2>
+          <div className="mt-3 space-y-3 text-slate-700">
+            <p><span className="font-semibold">Phone:</span> <a href="tel:+15405551212" className="text-royalRed">+1-540-555-1212</a></p>
+            <p><span className="font-semibold">Info:</span> <a href="mailto:info@genesisroyaltydaycare.com" className="text-royalRed">info@genesisroyaltydaycare.com</a></p>
+            <p><span className="font-semibold">Support:</span> <a href="mailto:support@genesisroyaltydaycare.com" className="text-royalRed">support@genesisroyaltydaycare.com</a></p>
+            <p><span className="font-semibold">Address:</span> 37018 Glendale St., Purcellville, VA 20132</p>
+          </div>
         </div>
-        <ContactForm />
-      </div>
 
-      <div className="mt-8">
-        <MapEmbed />
-      </div>
+        {/* Right: working form */}
+        <ContactForm />
+      </section>
     </div>
   );
 }
