@@ -53,35 +53,40 @@ export default function ContactPage() {
         <ContactForm />
 
         {/* Follow us — pinned under the form on large screens */}
-        <div className="card lg:col-start-2">
-          <h3 className="text-sm font-semibold text-slate-700">Follow us</h3>
-          <p className="mt-1 text-xs text-slate-500">
-            Get updates, photos, and announcements from Genesis Royalty.
-          </p>
+        <{/* Follow us (brand icons) */}
+<section className="container-p mt-6">
+  <div className="card">
+    <h2 className="text-xl font-bold">Follow us</h2>
+    <p className="mt-2 text-slate-600">
+      Get updates, photos, and announcements from Genesis Royalty.
+    </p>
 
-          <ul className="mt-3 flex items-center gap-2">
-            {[
-              { name: "Facebook",   href: "https://facebook.com/yourpage",            Icon: Facebook,  hover: "hover:text-[#1877F2]" },
-              { name: "X (Twitter)", href: "https://x.com/yourhandle",                Icon: Twitter,   hover: "hover:text-black" },
-              { name: "YouTube",    href: "https://youtube.com/@yourchannel",         Icon: Youtube,   hover: "hover:text-[#FF0000]" },
-              { name: "TikTok",     href: "https://www.tiktok.com/@yourhandle",       Icon: Music2,    hover: "hover:text-black" },
-              { name: "Instagram",  href: "https://instagram.com/yourhandle",         Icon: Instagram, hover: "hover:text-[#E1306C]" },
-            ].map(({ name, href, Icon, hover }) => (
-              <li key={name}>
-                <a
-                  href={href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={name}
-                  className={`group inline-flex h-9 w-9 items-center justify-center rounded-full border bg-white text-slate-700 transition focus-ring ${hover}`}
-                >
-                  <Icon className="h-4 w-4" aria-hidden="true" />
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
+    <div className="mt-4 flex flex-wrap gap-3">
+      {[
+        { href: "https://facebook.com/YourPage",  label: "Facebook", src: "/social/facebook.svg" },
+        { href: "https://twitter.com/YourHandle", label: "X (Twitter)", src: "/social/x.svg" },
+        { href: "https://youtube.com/@YourChannel", label: "YouTube", src: "/social/youtube.svg" },
+        { href: "https://tiktok.com/@YourHandle", label: "TikTok", src: "/social/tiktok.svg" },
+        { href: "https://instagram.com/YourHandle", label: "Instagram", src: "/social/instagram.svg" },
+      ].map((s) => (
+        <a
+          key={s.label}
+          href={s.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={s.label}
+          className="group rounded-full border bg-white/80 p-2 transition hover:-translate-y-0.5 hover:shadow-soft"
+        >
+          {/* use <img> to avoid Next/Image domain config for local svgs */}
+          <img
+            src={s.src}
+            alt={s.label}
+            width={36}
+            height={36}
+            className="block"
+          />
+        </a>
+      ))}
     </div>
-  );
-}
+  </div>
+</section>
