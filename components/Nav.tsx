@@ -39,7 +39,7 @@ export default function Nav() {
             "
           >
             <Image
-              src="/logo-mark.png"
+              src="/genesis_royalty_logo.jpg"     // full lockup (with text) in /public
               alt="Genesis Royalty logo"
               fill
               priority
