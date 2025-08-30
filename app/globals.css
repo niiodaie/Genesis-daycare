@@ -103,3 +103,7 @@ html, body {
   border-radius: 12px;
 }
 
+/* Section helpers for simple alternation */
+.section { padding-top: 3.5rem; padding-bottom: 3.5rem; } /* ~py-14 */
+.section-alt { padding-top: 3.5rem; padding-bottom: 3.5rem; background-color: #f8fafc; } /* bg-slate-50 */
+
