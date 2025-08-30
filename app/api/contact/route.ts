@@ -1,6 +1,5 @@
 // app/api/contact/route.ts
 import { NextRequest, NextResponse } from "next/server";
-import { Resend } from "resend";
 
 const RESEND_API_KEY = process.env.RESEND_API_KEY;
 const CONTACT_TO = process.env.CONTACT_TO || "info@genesisroyaltydaycare.com";
@@ -13,7 +12,7 @@ export async function POST(req: NextRequest) {
     email?: string;
     phone?: string;
     message?: string;
-    // honeypot fields
+    // honeypots
     company?: string;
     hp?: string;
   };
@@ -26,7 +25,7 @@ export async function POST(req: NextRequest) {
 
   const { name, email, phone, message, company, hp } = payload;
 
-  // Honeypot: real users won't fill these – if filled, pretend success.
+  // Honeypot: if filled, silently accept
   if (company || hp) return NextResponse.json({ ok: true });
 
   if (!name || !email || !message) {
@@ -36,13 +35,12 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  // Dev mode: no email provider set up yet
+  // If no key set yet, just log and succeed (so demo still works)
   if (!RESEND_API_KEY) {
     console.log("CONTACT (dev log):", { name, email, phone, message });
     return NextResponse.json({ ok: true, dev: true });
   }
 
-  const resend = new Resend(RESEND_API_KEY);
   const subject = `New website message from ${name}`;
   const text = [
     `Name: ${name}`,
@@ -54,15 +52,32 @@ export async function POST(req: NextRequest) {
   ].join("\n");
 
   try {
-    await resend.emails.send({
-      from: CONTACT_FROM,
-      to: CONTACT_TO,
-      subject,
-      text,
+    const res = await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: {
+        "Authorization": `Bearer ${RESEND_API_KEY}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        from: CONTACT_FROM,
+        to: CONTACT_TO,
+        subject,
+        text,
+      }),
     });
+
+    if (!res.ok) {
+      const err = await res.text();
+      console.error("Resend REST error:", err);
+      return NextResponse.json(
+        { ok: false, error: "Email failed to send. Please try again later." },
+        { status: 500 }
+      );
+    }
+
     return NextResponse.json({ ok: true });
-  } catch (err) {
-    console.error("Resend error:", err);
+  } catch (e) {
+    console.error("Contact API error:", e);
     return NextResponse.json(
       { ok: false, error: "Email failed to send. Please try again later." },
       { status: 500 }
