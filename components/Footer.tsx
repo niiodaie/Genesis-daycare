@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Mail, MapPin, Phone } from "lucide-react";
 import { Facebook, Instagram, Youtube, Twitter, Music2 } from "lucide-react"; // Music2 as TikTok fallback
-
+import SocialLinks from "@/components/SocialLinks";
 
 export default function Footer() {
   const year = new Date().getFullYear();
@@ -19,7 +19,16 @@ export default function Footer() {
   { name: "Instagram", href: "https://instagram.com/yourhandle", Icon: Instagram, hover: "hover:text-[#E1306C]" },
 ];
  
+// ...inside the return:
+<div className="grid gap-8 lg:grid-cols-4">
+  {/* Column 1: brand + address ... */}
+  <div>
+    {/* existing brand/address here */}
+    <SocialLinks className="mt-4" size={28} />
+  </div>
 
+  {/* Column 2–4: your Explore, Parents, Payments, etc. */}
+</div>
   return (
     <footer className="bg-white border-t">
       {/* Top grid (more compact) */}
