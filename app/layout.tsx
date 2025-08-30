@@ -94,7 +94,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="font-body">
         <Nav />
         {/* Full-bleed content; individual sections use .container-p */}
-        <main>{children}</main>
+        <main className="gradient-splash">
+          {children}
+          </main>
         <Footer />
       </body>
     </html>
