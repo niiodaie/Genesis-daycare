@@ -25,32 +25,38 @@ export default function Nav() {
   return (
     <header className="sticky top-0 z-40 bg-white/90 backdrop-blur supports-[backdrop-filter]:bg-white/70 border-b shadow-sm">
       <div className="container-p flex items-center justify-between py-5">
-        {/* BRAND — icon blown up in box + wordmark, all inside one Link */}
-        <Link
-          href="/"
-          aria-label="Genesis Royalty Daycare — Home"
-          className="flex items-center gap-4 md:gap-5 min-w-0"
-        >
-          <span
-            className="
-              relative overflow-hidden shrink-0
-              rounded-2xl bg-white ring-2 ring-royalYellow/60 shadow-soft
-              h-16 w-16 sm:h-20 sm:w-20 md:h-24 md:w-24
-            "
-          >
-            <Image
-              src="/genesis_royalty_logo.jpg"     // full lockup (with text) in /public
-              alt="Genesis Royalty logo"
-              fill
-              priority
-              sizes="(min-width:768px) 96px, (min-width:640px) 80px, 64px"
-              className="
-                object-contain object-center
-                scale-[1.18]                         /* tweak 1.10–1.25 to fit box */
-                [image-rendering:-webkit-optimize-contrast]
-              "
-            />
-          </span>
+       {/* BRAND — icon in box + stacked wordmark + subtitle */}
+<Link
+  href="/"
+  aria-label="Genesis Royalty Daycare — Home"
+  className="flex items-center gap-4 md:gap-5 min-w-0"
+>
+  {/* Icon box */}
+  <span className="relative overflow-hidden shrink-0 rounded-2xl bg-white ring-2 ring-royalYellow/60 shadow-soft h-16 w-16 sm:h-20 sm:w-20 md:h-24 md:w-24">
+    <Image
+      src="/logo-mark.png"
+      alt="Genesis Royalty logo"
+      fill
+      priority
+      sizes="(min-width:768px) 96px, (min-width:640px) 80px, 64px"
+      className="object-contain object-center scale-[1.16] [image-rendering:-webkit-optimize-contrast]"
+    />
+  </span>
+
+  {/* Wordmark + subtitle */}
+  <span className="hidden sm:block select-none leading-none">
+    <span className="block text-2xl md:text-3xl font-extrabold tracking-tight text-royalRed">
+      GENESIS
+    </span>
+    <span className="block -mt-1 text-2xl md:text-3xl font-extrabold tracking-tight text-royalYellow">
+      ROYALTY
+    </span>
+    <span className="block mt-1 text-[11px] md:text-xs font-extrabold uppercase tracking-[0.35em] text-royalPurple/90">
+      DAYCARE CENTER LLC
+    </span>
+  </span>
+</Link>
+
 
           {/* Wordmark */}
           <span className="hidden sm:block leading-tight select-none">
