@@ -105,21 +105,24 @@ export default function Footer() {
         </div>
 
         {/* Bottom bar */}
-        <div className="mt-8 border-t pt-6 text-sm text-slate-500 flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
-          <span>© {year} Genesis Royalty Daycare Center. All rights reserved.</span>
-          <span>
-            Powered by{" "}
-            <a
-              href="https://visnec.com"
-              target="_blank"
-              rel="noreferrer"
-              className="hover:underline"
-            >
-              Visnec Global
-            </a>
-          </span>
-        </div>
-      </div>
-    </footer>
-  );
-}
+<div className="mt-8 border-t pt-6 text-sm text-slate-500 flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+  <span>© {year} Genesis Royalty Daycare Center. All rights reserved.</span>
+
+  <span className="flex items-center gap-2">
+    Powered by{" "}
+    <a
+      href="https://visnec-it.com"
+      target="_blank"
+      rel="noreferrer"
+      className="hover:underline font-medium text-slate-700"
+    >
+      Visnec Global
+    </a>
+    <span aria-hidden>—</span>
+    {/* Change "The" to "Your" if you prefer that voice */}
+    <span className="whitespace-nowrap">
+      The <span className="text-[0.85em]">Technology</span> Partner
+    </span>
+  </span>
+</div>
+
