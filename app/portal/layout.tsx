@@ -1,29 +1,52 @@
-import RequireAuth from '@/components/RequireAuth'
-import Link from 'next/link'
-import { LogOut, User } from 'lucide-react'
+import Link from 'next/link';
+import Image from 'next/image';
+import { getSession } from '@/lib/auth';
+import type { NavItem } from '@/lib/portalTypes';
+
+const nav: NavItem[] = [
+  { href: '/portal', label: 'My Children', roles: ['parent', 'admin', 'staff'] },
+  { href: '/portal/staff/daily-report', label: 'Daily Report (Staff)', roles: ['staff', 'admin'] },
+  { href: '/portal/profile', label: 'Profile', roles: ['parent', 'admin', 'staff'] },
+  { href: '/portal/logout', label: 'Logout', roles: ['parent', 'admin', 'staff'] },
+];
 
 export default function PortalLayout({ children }: { children: React.ReactNode }) {
+  const session = getSession();
+
   return (
-    <RequireAuth>
-      <div className="py-8">
-        <div className="flex justify-between items-start mb-6">
-          <div>
-            <h1 className="text-3xl font-extrabold font-display">Parent Portal</h1>
-            <p className="text-gray-600 mt-2">View your child's daily reports, messages, and account info.</p>
-          </div>
-          <div className="flex items-center gap-4">
-            <Link href="/portal/profile" className="flex items-center gap-2 text-sm text-gray-600 hover:text-royalRed">
-              <User className="w-4 h-4" />
-              Profile
-            </Link>
-            <Link href="/portal/logout" className="flex items-center gap-2 text-sm text-gray-600 hover:text-royalRed">
-              <LogOut className="w-4 h-4" />
-              Sign out
-            </Link>
+    <div className="min-h-[70vh]">
+      <header className="border-b bg-white">
+        <div className="container-p flex items-center justify-between py-4">
+          <Link href="/portal" className="flex items-center gap-3">
+            <span className="relative overflow-hidden rounded-xl ring-2 ring-royalYellow/60 shadow-soft h-10 w-10">
+              <Image src="/logo-mark.png" alt="Genesis mark" fill className="object-contain" />
+            </span>
+            <div className="hidden sm:block leading-none">
+              <div className="text-xl font-extrabold text-royalRed">GENESIS <span className="text-royalYellow">ROYALTY</span></div>
+              <div className="text-[10px] font-extrabold tracking-[0.35em] text-royalPurple/80">DAYCARE CENTER</div>
+            </div>
+          </Link>
+
+          <div className="text-sm">
+            <div className="font-semibold">{session?.name ?? 'Guest'}</div>
+            <div className="text-slate-500 capitalize">{session?.role}</div>
           </div>
         </div>
-        <div>{children}</div>
-      </div>
-    </RequireAuth>
-  )
+      </header>
+
+      <nav className="container-p py-3">
+        <div className="flex flex-wrap gap-3">
+          {nav
+            .filter((n) => !session || !n.roles || n.roles.includes(session.role))
+            .map((n) => (
+              <Link key={n.href} href={n.href} className="btn btn-outline text-sm">
+                {n.label}
+              </Link>
+            ))}
+        </div>
+      </nav>
+
+      <main className="container-p pb-12">{children}</main>
+    </div>
+  );
 }
