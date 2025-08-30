@@ -1,27 +1,71 @@
+// app/api/contact/route.ts
 import { NextRequest, NextResponse } from "next/server";
-import nodemailer from "nodemailer";
+import { Resend } from "resend";
+
+const RESEND_API_KEY = process.env.RESEND_API_KEY;
+const CONTACT_TO = process.env.CONTACT_TO || "info@genesisroyaltydaycare.com";
+const CONTACT_FROM =
+  process.env.CONTACT_FROM || "Genesis Royalty <no-reply@genesisroyaltydaycare.com>";
 
 export async function POST(req: NextRequest) {
+  let payload: {
+    name?: string;
+    email?: string;
+    phone?: string;
+    message?: string;
+    // honeypot fields
+    company?: string;
+    hp?: string;
+  };
+
   try {
-    const { name, email, phone, message } = await req.json();
-    const to = process.env.TO_EMAIL || process.env.NEXT_PUBLIC_EMAIL_INFO || "info@genesisroyaltydaycare.com";
-    if (!process.env.SMTP_HOST) {
-      return NextResponse.json({ ok: true, note: "SMTP not configured; printing to console." });
-    }
-    const transporter = nodemailer.createTransport({
-      host: process.env.SMTP_HOST,
-      port: Number(process.env.SMTP_PORT || 587),
-      secure: false,
-      auth: { user: process.env.SMTP_USER, pass: process.env.SMTP_PASS }
-    });
-    await transporter.sendMail({
-      from: `"Website Contact" <${process.env.SMTP_USER || "noreply@localhost"}>`,
-      to,
-      subject: "New Contact Submission",
-      text: `From: ${name} <${email}> (${phone || "-"})\n\n${message}`,
+    payload = await req.json();
+  } catch {
+    return NextResponse.json({ ok: false, error: "Invalid JSON" }, { status: 400 });
+  }
+
+  const { name, email, phone, message, company, hp } = payload;
+
+  // Honeypot: real users won't fill these – if filled, pretend success.
+  if (company || hp) return NextResponse.json({ ok: true });
+
+  if (!name || !email || !message) {
+    return NextResponse.json(
+      { ok: false, error: "Please provide name, email, and message." },
+      { status: 400 }
+    );
+  }
+
+  // Dev mode: no email provider set up yet
+  if (!RESEND_API_KEY) {
+    console.log("CONTACT (dev log):", { name, email, phone, message });
+    return NextResponse.json({ ok: true, dev: true });
+  }
+
+  const resend = new Resend(RESEND_API_KEY);
+  const subject = `New website message from ${name}`;
+  const text = [
+    `Name: ${name}`,
+    `Email: ${email}`,
+    `Phone: ${phone || "-"}`,
+    "",
+    "Message:",
+    message,
+  ].join("\n");
+
+  try {
+    await resend.emails.send({
+      from: CONTACT_FROM,
+      to: CONTACT_TO,
+      subject,
+      text,
     });
     return NextResponse.json({ ok: true });
-  } catch (e:any) {
-    return NextResponse.json({ ok: false, error: e?.message || "Unknown error" }, { status: 500 });
+  } catch (err) {
+    console.error("Resend error:", err);
+    return NextResponse.json(
+      { ok: false, error: "Email failed to send. Please try again later." },
+      { status: 500 }
+    );
   }
 }
