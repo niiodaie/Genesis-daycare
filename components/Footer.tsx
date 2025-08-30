@@ -1,12 +1,24 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Mail, MapPin, Phone } from "lucide-react";
+import { Facebook, Instagram, Youtube, Twitter, Music2 } from "lucide-react"; // Music2 as TikTok fallback
+
 
 export default function Footer() {
   const year = new Date().getFullYear();
   const email = process.env.NEXT_PUBLIC_EMAIL_INFO || "info@genesisroyaltydaycare.com";
   const phone = process.env.NEXT_PUBLIC_PHONE || "";
   const address = "37018 Glendale St., Purcellville, VA 20132";
+
+ const socials = [
+  { name: "Facebook", href: "https://facebook.com/yourpage", Icon: Facebook, hover: "hover:text-[#1877F2]" },
+  { name: "X (Twitter)", href: "https://x.com/yourhandle", Icon: Twitter, hover: "hover:text-black" },
+  { name: "YouTube", href: "https://youtube.com/@yourchannel", Icon: Youtube, hover: "hover:text-[#FF0000]" },
+  // If you have a TikTok SVG/icon later, swap Music2 with it.
+  { name: "TikTok", href: "https://www.tiktok.com/@yourhandle", Icon: Music2, hover: "hover:text-[#000000]" },
+  { name: "Instagram", href: "https://instagram.com/yourhandle", Icon: Instagram, hover: "hover:text-[#E1306C]" },
+];
+ 
 
   return (
     <footer className="bg-white border-t">
