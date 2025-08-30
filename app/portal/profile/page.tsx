@@ -1,38 +1,28 @@
-'use client'
-import Breadcrumbs from '@/components/Breadcrumbs'
-import { useUser } from '@/lib/useUser'
+import { getSession } from '@/lib/auth';
 
 export default function ProfilePage() {
-  const { user } = useUser()
-
-  const breadcrumbItems = [
-    { label: 'Portal', href: '/portal' },
-    { label: 'Profile' }
-  ]
-
+  const s = getSession();
   return (
-    <div className="grid gap-6">
-      <Breadcrumbs items={breadcrumbItems} />
-      
-      <div className="card">
-        <h1 className="text-2xl font-bold">Profile</h1>
-        <div className="mt-4 space-y-4">
+    <div className="max-w-xl py-6">
+      <h1 className="text-2xl font-bold">My Profile</h1>
+      {!s ? (
+        <p className="mt-3 text-slate-600">You’re signed out.</p>
+      ) : (
+        <dl className="mt-4 grid gap-3">
           <div>
-            <label className="block text-sm font-medium text-gray-700">Email</label>
-            <p className="mt-1 text-gray-900">{user?.email || 'Not available'}</p>
+            <dt className="text-sm text-slate-600">Name</dt>
+            <dd className="font-semibold">{s.name}</dd>
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700">User ID</label>
-            <p className="mt-1 text-gray-900 font-mono text-sm">{user?.id || 'Not available'}</p>
+            <dt className="text-sm text-slate-600">Email</dt>
+            <dd className="font-semibold">{s.email}</dd>
           </div>
-          <div className="pt-4">
-            <p className="text-sm text-gray-600">
-              Profile management features will be available soon. Contact the daycare center for any account updates.
-            </p>
+          <div>
+            <dt className="text-sm text-slate-600">Role</dt>
+            <dd className="font-semibold capitalize">{s.role}</dd>
           </div>
-        </div>
-      </div>
+        </dl>
+      )}
     </div>
-  )
+  );
 }
-
