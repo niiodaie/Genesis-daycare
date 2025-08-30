@@ -25,49 +25,45 @@ export default function Nav() {
   return (
     <header className="sticky top-0 z-40 bg-white/90 backdrop-blur supports-[backdrop-filter]:bg-white/70 border-b shadow-sm">
       <div className="container-p flex items-center justify-between py-5">
-       {/* BRAND — icon blown up to edges inside the box */}
-<Link
-  href="/"
-  aria-label="Genesis Royalty Daycare — Home"
-  className="flex items-center min-w-0"
->
-  <span
-    className="
-      relative overflow-hidden shrink-0
-      rounded-2xl bg-white ring-2 ring-royalYellow/60 shadow-soft
-      h-16 w-16 sm:h-20 sm:w-20 md:h-24 md:w-24
-    "
-  >
-    <Image
-      src="/logo-mark.png"               // <-- use your tightest-crop icon
-      alt="Genesis Royalty logo"
-      fill                               // <-- lets the image fill the box
-      priority
-      sizes="(min-width:768px) 96px, (min-width:640px) 80px, 64px"
-      className="
-        object-contain object-center
-        /* 'blow out' a bit so it visually touches the rounded box edges */
-        scale-[1.18]                     /* bump up or down (1.10–1.25) */
-        [image-rendering:-webkit-optimize-contrast]
-      "
-    />
-  </span>
-</Link>
+        {/* BRAND — icon blown up in box + wordmark, all inside one Link */}
+        <Link
+          href="/"
+          aria-label="Genesis Royalty Daycare — Home"
+          className="flex items-center gap-4 md:gap-5 min-w-0"
+        >
+          <span
+            className="
+              relative overflow-hidden shrink-0
+              rounded-2xl bg-white ring-2 ring-royalYellow/60 shadow-soft
+              h-16 w-16 sm:h-20 sm:w-20 md:h-24 md:w-24
+            "
+          >
+            <Image
+              src="/logo-mark.png"
+              alt="Genesis Royalty logo"
+              fill
+              priority
+              sizes="(min-width:768px) 96px, (min-width:640px) 80px, 64px"
+              className="
+                object-contain object-center
+                scale-[1.18]                         /* tweak 1.10–1.25 to fit box */
+                [image-rendering:-webkit-optimize-contrast]
+              "
+            />
+          </span>
 
+          {/* Wordmark */}
+          <span className="hidden sm:block leading-tight select-none">
+            <span className="block text-2xl md:text-3xl font-extrabold tracking-tight text-royalRed">
+              GENESIS
+            </span>
+            <span className="block -mt-1 text-xl md:text-2xl font-extrabold tracking-tight text-royalYellow">
+              ROYALTY
+            </span>
+          </span>
+        </Link>
 
-  {/* Wordmark */}
-  <span className="hidden sm:block leading-tight select-none">
-    <span className="block text-2xl md:text-3xl font-extrabold tracking-tight text-royalRed">
-      GENESIS
-    </span>
-    <span className="block -mt-1 text-xl md:text-2xl font-extrabold tracking-tight text-royalYellow">
-      ROYALTY
-    </span>
-  </span>
-</Link>
-
-
-        {/* Desktop nav (start at lg so the brand has space) */}
+        {/* Desktop nav */}
         <nav className="hidden lg:flex items-center gap-5 xl:gap-6">
           {links.map((l) => (
             <Link
