@@ -1,16 +1,11 @@
-'use client'
-import { supabase } from '@/lib/supabaseClient'
-import { useEffect } from 'react'
-import { useRouter } from 'next/navigation'
+'use client';
+import { useEffect } from 'react';
 
 export default function LogoutPage() {
-  const router = useRouter()
   useEffect(() => {
-    async function run() {
-      if (supabase) await supabase.auth.signOut()
-      router.replace('/')
-    }
-    run()
-  }, [router])
-  return <div className="p-8">Signing out…</div>
+    fetch('/portal/logout/clear', { method: 'POST' }).finally(() => {
+      window.location.href = '/portal/login';
+    });
+  }, []);
+  return <div className="py-10">Signing out…</div>;
 }
