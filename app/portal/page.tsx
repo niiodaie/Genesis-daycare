@@ -14,6 +14,25 @@ type Report = { id: string; date: string; summary?: string; child_id: string };
 export default function PortalHome() {
   const { user } = useUser();
 
+  if (!user) {
+  return (
+    <section className="container-p">
+      <div className="card text-center py-10">
+        <span className="badge">Welcome</span>
+        <h1 className="mt-2 text-2xl md:text-3xl font-bold">Welcome to MyGenesis</h1>
+        <p className="mt-2 text-slate-600">
+          Sign in to explore your child’s activities, daily reports, and profile.
+        </p>
+        <div className="mt-5 flex justify-center gap-3">
+          <Link href="/portal/login" className="btn btn-primary">Sign in</Link>
+          <Link href="/contact" className="btn btn-outline">Need help?</Link>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+
   const [children, setChildren] = useState<Child[]>([]);
   const [reports, setReports] = useState<Report[]>([]);
 
