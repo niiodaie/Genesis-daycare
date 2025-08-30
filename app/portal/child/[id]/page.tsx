@@ -9,6 +9,9 @@ import { useUser } from '@/lib/useUser';                  // sandbox/session hoo
 import { children as mockChildren, memory } from '@/lib/mockData';
 import Breadcrumbs from '@/components/Breadcrumbs';
 
+export const dynamic = 'force-dynamic';
+export const fetchCache = 'force-no-store';
+
 type Child = {
   id: string;
   first_name?: string;
