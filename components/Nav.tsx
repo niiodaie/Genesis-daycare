@@ -34,7 +34,7 @@ export default function Nav() {
           {/* Icon box */}
           <span className="relative overflow-hidden shrink-0 rounded-2xl bg-white ring-2 ring-royalYellow/60 shadow-soft h-16 w-16 sm:h-20 sm:w-20 md:h-24 md:w-24">
             <Image
-              src="/logo-mark.png"
+              src="/genesis_royalty_logo.jpg"     // full lockup (with text) in /public
               alt="Genesis Royalty logo"
               fill
               priority
